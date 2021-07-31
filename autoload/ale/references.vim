@@ -54,12 +54,17 @@ function! ale#references#HandleLSPResponse(conn_id, response) abort
         if type(l:result) is v:t_list
             for l:response_item in l:result
                 let l:filename = ale#path#FromURI(l:response_item.uri)
-                call add(l:item_list, {
+                let l:item = {
                 \ 'filename': l:filename,
                 \ 'line': l:response_item.range.start.line + 1,
                 \ 'column': l:response_item.range.start.character + 1,
-                \ 'match': readfile(l:filename)[l:response_item.range.start.line],
-                \})
+                \}
+
+                if g:ale_lsp_readfile_preview
+                    let l:item['match'] = readfile(l:filename)[l:response_item.range.start.line]
+                endif
+
+                call add(l:item_list, l:item)
             endfor
         endif
 

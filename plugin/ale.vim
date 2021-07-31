@@ -184,6 +184,9 @@ let g:ale_deno_executable = get(g:, 'ale_deno_executable', 'deno')
 " If 1, enable a popup menu for commands.
 let g:ale_popup_menu_enabled = get(g:, 'ale_popup_menu_enabled', has('gui_running'))
 
+" Use readfile to provide preview for lsp server.
+let g:ale_lsp_readfile_preview = get(g:, 'ale_lsp_readfile_preview', 0)
+
 if g:ale_set_balloons is 1 || g:ale_set_balloons is# 'hover'
     call ale#balloon#Enable()
 endif

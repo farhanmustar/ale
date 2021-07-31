@@ -136,6 +136,11 @@ let s:default_registry = {
 \       'suggested_filetypes': ['javascript'],
 \       'description': 'automatic imports for javascript',
 \   },
+\   'js-beautify': {
+\       'function': 'ale#fixers#js_beautify#Fix',
+\       'suggested_filetypes': ['javascript', 'json'],
+\       'description': 'Fix javascript file with js-beautify.',
+\   },
 \   'puppetlint': {
 \       'function': 'ale#fixers#puppetlint#Fix',
 \       'suggested_filetypes': ['puppet'],

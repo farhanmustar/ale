@@ -24,20 +24,25 @@ endfunction
 " stay_here - If 1, stay in the window you came from.
 function! ale#preview#Show(lines, ...) abort
     let l:options = get(a:000, 0, {})
+    let l:ft = get(l:options, 'filetype', 'ale-preview')
 
-    silent pedit ALEPreviewWindow
-    wincmd P
+    if l:ft == 'qf'
+        cgetexpr a:lines
+    else
+        silent pedit ALEPreviewWindow
+        wincmd P
 
-    setlocal modifiable
-    setlocal noreadonly
-    setlocal nobuflisted
-    setlocal buftype=nofile
-    setlocal bufhidden=wipe
-    :%d
-    call setline(1, a:lines)
-    setlocal nomodifiable
-    setlocal readonly
-    let &l:filetype = get(l:options, 'filetype', 'ale-preview')
+        setlocal modifiable
+        setlocal noreadonly
+        setlocal nobuflisted
+        setlocal buftype=nofile
+        setlocal bufhidden=wipe
+        :%d
+        call setline(1, a:lines)
+        setlocal nomodifiable
+        setlocal readonly
+        let &l:filetype = l:ft
+    endif
 
     for l:command in get(l:options, 'commands', [])
         call execute(l:command)

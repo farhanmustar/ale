@@ -90,7 +90,7 @@ function! ale#preview#ShowSelection(item_list, ...) abort
         \)
     endfor
 
-    call ale#preview#Show(l:lines, {'filetype': 'ale-preview-selection'})
+    call ale#preview#Show(l:lines, {'filetype': g:ale_selection_in_quickfix ? 'qf' : 'ale-preview-selection'})
     let b:ale_preview_item_list = a:item_list
     let b:ale_preview_item_open_in = get(l:options, 'open_in', 'current-buffer')
 

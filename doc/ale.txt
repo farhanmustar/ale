@@ -964,12 +964,13 @@ g:ale_default_navigation                             *g:ale_default_navigation*
   buffer, such as for |ALEFindReferences|, or |ALEGoToDefinition|.
 
 
-g:ale_selection_in_quickfix                       *g:ale_selection_in_quickfix*
+g:ale_default_selection                               *g:ale_default_selection*
 
-  Type: |Number|
-  Default: `0`
+  Type: |String|
+  Default: `'preview'`
 
-  Change the default preview selection window to |quickfix| if set to 1.
+  The default buffer type used to display selection. Set the value to
+  `'preview'` or `'quickfix'`.
 
 
 g:ale_detail_to_floating_preview             *g:ale_detail_to_floating_preview*

@@ -24,25 +24,20 @@ endfunction
 " stay_here - If 1, stay in the window you came from.
 function! ale#preview#Show(lines, ...) abort
     let l:options = get(a:000, 0, {})
-    let l:ft = get(l:options, 'filetype', 'ale-preview')
 
-    if l:ft == 'qf'
-        cgetexpr a:lines
-    else
-        silent pedit ALEPreviewWindow
-        wincmd P
+    silent pedit ALEPreviewWindow
+    wincmd P
 
-        setlocal modifiable
-        setlocal noreadonly
-        setlocal nobuflisted
-        setlocal buftype=nofile
-        setlocal bufhidden=wipe
-        :%d
-        call setline(1, a:lines)
-        setlocal nomodifiable
-        setlocal readonly
-        let &l:filetype = l:ft
-    endif
+    setlocal modifiable
+    setlocal noreadonly
+    setlocal nobuflisted
+    setlocal buftype=nofile
+    setlocal bufhidden=wipe
+    :%d
+    call setline(1, a:lines)
+    setlocal nomodifiable
+    setlocal readonly
+    let &l:filetype = get(l:options, 'filetype', 'ale-preview')
 
     for l:command in get(l:options, 'commands', [])
         call execute(l:command)
@@ -52,6 +47,11 @@ function! ale#preview#Show(lines, ...) abort
         wincmd p
     endif
 endfunction
+
+function! ale#preview#ShowQuickfix(lines, ...) abort
+    cgetexpr a:lines
+endfunction
+
 
 " Close the preview window if the filetype matches the given one.
 function! ale#preview#CloseIfTypeMatches(filetype) abort
@@ -90,7 +90,11 @@ function! ale#preview#ShowSelection(item_list, ...) abort
         \)
     endfor
 
-    call ale#preview#Show(l:lines, {'filetype': g:ale_selection_in_quickfix ? 'qf' : 'ale-preview-selection'})
+    if g:ale_default_selection == 'quickfix'
+      call ale#preview#ShowQuickfix(l:lines)
+    else
+      call ale#preview#Show(l:lines, {'filetype': 'ale-preview-selection'})
+    endif
     let b:ale_preview_item_list = a:item_list
     let b:ale_preview_item_open_in = get(l:options, 'open_in', 'current-buffer')
 

@@ -184,8 +184,8 @@ let g:ale_deno_executable = get(g:, 'ale_deno_executable', 'deno')
 " If 1, enable a popup menu for commands.
 let g:ale_popup_menu_enabled = get(g:, 'ale_popup_menu_enabled', has('gui_running'))
 
-" Open selection preview in quickfix.
-let g:ale_selection_in_quickfix = get(g:, 'ale_selection_in_quickfix', 0)
+" Configure default selection buffer.
+let g:ale_default_selection = get(g:, 'ale_default_selection', 'preview')
 
 if g:ale_set_balloons is 1 || g:ale_set_balloons is# 'hover'
     call ale#balloon#Enable()

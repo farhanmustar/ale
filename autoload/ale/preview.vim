@@ -49,7 +49,11 @@ function! ale#preview#Show(lines, ...) abort
 endfunction
 
 function! ale#preview#ShowQuickfix(lines, ...) abort
-    cgetexpr a:lines
+    call setqflist([], 'r', {
+    \   'lines': a:lines,
+    \   'title': 'ale-selection-quickfix',
+    \})
+    copen
 endfunction
 
 

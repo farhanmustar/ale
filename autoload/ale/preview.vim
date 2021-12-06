@@ -81,7 +81,7 @@ function! ale#preview#ShowSelection(item_list, ...) abort
         \   l:filename
         \       . ':' . l:item.line
         \       . ':' . l:item.column
-        \       . (!empty(l:match) ? ' ' . l:match : ''),
+        \       . ':' . (!empty(l:match) ? ' ' . l:match : ''),
         \)
     endfor
 

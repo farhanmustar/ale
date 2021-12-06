@@ -985,6 +985,15 @@ g:ale_disable_lsp                                           *g:ale_disable_lsp*
   Please see also |ale-lsp|.
 
 
+g:ale_lsp_readfile_preview                         *g:ale_lsp_readfile_preview*
+
+  Type: |Number|
+  Default: `0`
+
+  When this option is set to `1`, LSP result will show line preview similar to
+  `tsserver` by using the |readfile| command. This might be slow for bigger file.
+
+
 g:ale_echo_cursor                                           *g:ale_echo_cursor*
 
   Type: |Number|

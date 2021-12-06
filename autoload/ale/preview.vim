@@ -48,6 +48,15 @@ function! ale#preview#Show(lines, ...) abort
     endif
 endfunction
 
+function! ale#preview#ShowQuickfix(lines, ...) abort
+    call setqflist([], 'r', {
+    \   'lines': a:lines,
+    \   'title': 'ale-selection-quickfix',
+    \})
+    copen
+endfunction
+
+
 " Close the preview window if the filetype matches the given one.
 function! ale#preview#CloseIfTypeMatches(filetype) abort
     for l:win in getwininfo()
@@ -85,7 +94,11 @@ function! ale#preview#ShowSelection(item_list, ...) abort
         \)
     endfor
 
-    call ale#preview#Show(l:lines, {'filetype': 'ale-preview-selection'})
+    if g:ale_default_selection == 'quickfix'
+      call ale#preview#ShowQuickfix(l:lines)
+    else
+      call ale#preview#Show(l:lines, {'filetype': 'ale-preview-selection'})
+    endif
     let b:ale_preview_item_list = a:item_list
     let b:ale_preview_item_open_in = get(l:options, 'open_in', 'current-buffer')
 

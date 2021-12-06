@@ -184,6 +184,9 @@ let g:ale_deno_executable = get(g:, 'ale_deno_executable', 'deno')
 " If 1, enable a popup menu for commands.
 let g:ale_popup_menu_enabled = get(g:, 'ale_popup_menu_enabled', has('gui_running'))
 
+" Configure default selection buffer.
+let g:ale_default_selection = get(g:, 'ale_default_selection', 'preview')
+
 " Use readfile to provide preview for lsp server.
 let g:ale_lsp_readfile_preview = get(g:, 'ale_lsp_readfile_preview', 0)
 

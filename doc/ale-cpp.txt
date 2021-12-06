@@ -41,6 +41,14 @@ g:ale_cpp_astyle_project_options             *g:ale_cpp_astyle_project_options*
   directories of the source file's directory.
 
 
+g:ale_cpp_astyle_options                             *g:ale_cpp_astyle_options*
+                                                     *b:ale_cpp_astyle_options*
+  Type: |String|
+  Default: `''`
+
+  This variable can be changed to set command line options.
+
+
 ===============================================================================
 cc                                                                 *ale-cpp-cc*
                                                                   *ale-cpp-gcc*
